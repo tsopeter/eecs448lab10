@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<style>
+			body{
+				background-color: black;
+				color: #66ff00;
+				font-family: monospace;
+			}
+			h1{
+				font-size: 50px;
+			}
+			td, th{
+				font-size: 20px;
+				border: 4px solid darkslateblue;
+				text-align: left;
+				padding: 15px;
+			}
+			input{
+				background-color: darkgreen;
+				border-radius: 10px;
+				font-size: 15px;
+			}
+			input:hover{
+				background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<h1> Mod HAMMER </h1>
+		<!-- create a table of posts -->
+		<?php
+			$mysqli = new mysqli("mysql.eecs.ku.edu", "petertso", "upha3eWa", "petertso");
+			$query = "Select * from Posts where 1=1  Order by post_id ; ";
+
+			$result = $mysqli->query($query);
+
+			$form = "<form class=\"interface\" action=\"deletePost.php\" method=\"post\">";
+			$table = "<table>";
+				$table = $table . "<th> Post ID </th><th> Author </th><th> Post </th> <th>Delete ?</th>";
+				while($row = $result->fetch_assoc()){
+				$table = $table."<tr><td>".$row["post_id"]."</td><td>".$row["author_id"]."</td><td>".$row["content"]."</td>";
+				$table = $table."<td> <input type=\"checkbox\" name=\"input[]\" value=\"".$row["post_id"]."\"></input></td></tr>";
+			}
+			$table = $table . "</table>";
+			$form = $form . $table;
+			$form = $form . "<input type=\"submit\"></input>";
+			$form = $form . "</form>";
+			echo $form;
+
+			$result->free();
+			$mysqli->close();
+		?>
+	</body>
+</html>
+

@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<style>
+			body{
+				background-color: lightgrey;
+				font-family: monospace;
+			}
+			h1{
+				text-align: center;
+				font-size: 50px;
+				border: 5px solid black;
+				background-color: white;
+				border-radius: 10px;
+			}
+			textarea{
+				border-radius: 1px;
+			}
+			input.sub{
+				background-color: darkred;
+				color: white;
+			}
+			input.sub:hover{
+				background-color: red;
+			}
+			form{
+				font-size: 20px;
+			}
+			div{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+			}
+		</style>
+	</head>
+	<body>
+		<h1> P o S T </h1>
+		<div class="interface">
+			<form id="inputform" class="interface" action="createPosts.php" method="post">
+				<div class="e">
+					Username: <input name="uname" type="text" class="uname"></input>
+				</div>
+				<textarea name="input" class="textinput" rows="5" cols="50" >Input here.</textarea>
+				<input class="sub" type="submit"></input>
+			</form>
+		</div>
+	</body>
+</html>
+

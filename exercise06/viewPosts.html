@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<style>
+			body{
+				background-color: black;
+				color: #66ff00;
+				font-family: monospace;
+			}
+			h1{
+				font-size: 50px;
+			}
+			div{
+				font-size: 20px;
+			}
+			select{
+				font-size: 25px;
+			}
+			input{
+				font-size: 25px;
+				background-color: darkgreen;
+			}
+			input:hover{
+				background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<h1> View User Posts </h1>
+		<div class="viewport">
+			<!-- embedded php for forms -->
+			<?php
+       				$mysqli = new mysqli("mysql.eecs.ku.edu", "petertso", "upha3eWa", "petertso");
+       				
+       				/* get the users that have posted */
+       				$query = "Select distinct author_id from Posts where 1=1 ;";
+       				$result = $mysqli->query($query);
+
+				$form = "<form class=\"input\" action=\"viewPosts.php\" method=\"post\">";
+				$drop = "<select name=\"input\" class=\"input\">";
+				while($row = $result->fetch_assoc()){
+					$drop = $drop . "<option value=\"".$row["author_id"]."\">".$row["author_id"]."</option>";
+			}
+				$drop = $drop . "</select>";
+				$drop = $drop . "</br>";
+				$drop = $drop . "<input type=\"submit\"></input>";
+
+				$form = $form . $drop;
+				$form = $form . "</form>";
+				
+				echo $form;
+
+				$result->free();
+				$mysqli->clear();
+			?>
+		</div>
+	</body>
+</html>
+
+
